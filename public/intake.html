@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuminaDx — Patient Intake</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-icon">⬡</div>
+      <span class="brand-name">Lumina<span>Dx</span></span>
+    </div>
+    <div class="topbar-center">
+      <div class="topbar-status">
+        <span class="status-dot"></span>
+        <span>INTAKE MODE</span>
+        <span style="color:var(--slate-700)">|</span>
+        <span>STEP 01 OF 03</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span class="session-id" id="topbar-session-id">SID: —</span>
+      <a href="/" class="topbar-btn">← Overview</a>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <span class="sidebar-section-label">Workflow</span>
+    <a href="/" class="nav-item" data-page="home">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview
+      <span class="nav-badge">HOME</span>
+    </a>
+    <a href="/intake" class="nav-item active" data-page="intake">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+      Patient Intake
+      <span class="nav-badge">01</span>
+    </a>
+    <a href="/analysis" class="nav-item disabled" data-page="analysis">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Analysis
+      <span class="nav-badge">02</span>
+    </a>
+    <a href="/report" class="nav-item disabled" data-page="report">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+      Report
+      <span class="nav-badge">03</span>
+    </a>
+    <span class="sidebar-section-label">System</span>
+    <a href="#" class="nav-item" id="clear-session-btn">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+      Clear Session
+    </a>
+    <div class="sidebar-footer">
+      <div class="kpi-label" style="padding:0 8px">Build</div>
+      <div style="padding:4px 8px;font-family:var(--font-mono);font-size:10px;color:var(--slate-600)">LuminaDx AIH · v1.0.0</div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ─────────────────────────────────────────────────────── -->
+  <main class="main-content">
+    <div class="content-inner">
+
+      <div class="page-header">
+        <div class="page-eyebrow">Step 01 — Data Collection</div>
+        <h1 class="page-title">Patient Intake</h1>
+        <p class="page-subtitle">Enter patient demographics, clinical findings, serological markers, and upload supporting documents.</p>
+      </div>
+
+      <form id="intake-form" autocomplete="off">
+
+        <!-- Section: Demographics -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <span class="card-title">Demographics</span>
+            <span class="badge badge-slate">Required</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div class="form-group">
+              <label class="form-label">Patient Name</label>
+              <input class="form-input" type="text" id="patient-name" placeholder="Full name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Age</label>
+              <input class="form-input" type="number" id="patient-age" placeholder="Years" min="1" max="120" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sex</label>
+              <select class="form-input" id="patient-sex">
+                <option value="">Select</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Serology -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <span class="card-title">Serological Markers</span>
+            <span class="badge badge-blue">IAIHG Criteria</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+            <div class="form-group">
+              <label class="form-label">ANA Titer</label>
+              <select class="form-input" id="ana-titer">
+                <option value="">Select</option>
+                <option value="negative">Negative</option>
+                <option value="1:40">1:40</option>
+                <option value="1:80">1:80</option>
+                <option value=">=1:160">&ge;1:160</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ASMA Titer</label>
+              <select class="form-input" id="asma-titer">
+                <option value="">Select</option>
+                <option value="negative">Negative</option>
+                <option value="1:40">1:40</option>
+                <option value="1:80">1:80</option>
+                <option value=">=1:160">&ge;1:160</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Anti-LKM1</label>
+              <select class="form-input" id="anti-lkm1">
+                <option value="">Select</option>
+                <option value="negative">Negative</option>
+                <option value="1:40">1:40</option>
+                <option value=">=1:80">&ge;1:80</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div class="form-group">
+              <label class="form-label">IgG (g/L)</label>
+              <input class="form-input" type="number" id="igg-level" placeholder="e.g. 18.5" step="0.1" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">ALT (U/L)</label>
+              <input class="form-input" type="number" id="alt-level" placeholder="e.g. 120" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">AST (U/L)</label>
+              <input class="form-input" type="number" id="ast-level" placeholder="e.g. 95" min="0" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Viral Exclusion -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <span class="card-title">Viral Hepatitis Exclusion</span>
+            <span class="badge badge-amber">Differential</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div class="form-group">
+              <label class="form-label">Hepatitis B (HBsAg)</label>
+              <select class="form-input" id="hbsag">
+                <option value="">Select</option>
+                <option value="negative">Negative</option>
+                <option value="positive">Positive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hepatitis C (Anti-HCV)</label>
+              <select class="form-input" id="anti-hcv">
+                <option value="">Select</option>
+                <option value="negative">Negative</option>
+                <option value="positive">Positive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Drug-Induced Liver Injury</label>
+              <select class="form-input" id="dili">
+                <option value="">Select</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Histology -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <span class="card-title">Histological Findings</span>
+            <span class="badge badge-slate">Biopsy</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+            <div class="form-group">
+              <label class="form-label">Interface Hepatitis</label>
+              <select class="form-input" id="interface-hepatitis">
+                <option value="">Select</option>
+                <option value="absent">Absent</option>
+                <option value="present">Present</option>
+                <option value="not-done">Biopsy Not Done</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rosette Formation</label>
+              <select class="form-input" id="rosette">
+                <option value="">Select</option>
+                <option value="absent">Absent</option>
+                <option value="present">Present</option>
+                <option value="not-done">Biopsy Not Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Additional Histological Notes</label>
+            <textarea class="form-input" id="histo-notes" rows="3" placeholder="Describe any additional findings: plasma cell infiltrate, emperipolesis, fibrosis grade…" style="resize:vertical"></textarea>
+          </div>
+        </div>
+
+        <!-- Section: Clinical Notes & File Upload -->
+        <div class="card" style="margin-bottom:24px">
+          <div class="card-header">
+            <span class="card-title">Clinical Notes & Documents</span>
+            <span class="badge badge-slate">Optional</span>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label class="form-label">Free-text Clinical Summary</label>
+            <textarea class="form-input" id="clinical-notes" rows="4" placeholder="Summarise relevant history, symptom onset, prior treatments, comorbidities…" style="resize:vertical"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Upload Documents (PDF, images)</label>
+            <div class="file-drop-zone" id="file-drop-zone">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--slate-500);margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div style="font-size:13px;color:var(--slate-400)">Drop files here or <label for="file-input" style="color:var(--blue-400);cursor:pointer;text-decoration:underline">browse</label></div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:var(--slate-600);margin-top:4px">PDF · JPG · PNG · max 10MB each</div>
+              <input type="file" id="file-input" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" />
+            </div>
+            <div id="file-list" style="margin-top:8px;display:flex;flex-direction:column;gap:6px"></div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div id="form-error" style="font-family:var(--font-mono);font-size:11px;color:var(--accent-red);display:none"></div>
+          <div style="margin-left:auto;display:flex;gap:12px">
+            <a href="/" class="btn btn-ghost">← Back</a>
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              Run Analysis
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>
+
+<script src="/app.js"></script>
+<script src="/intake.js"></script>
+</body>
+</html>

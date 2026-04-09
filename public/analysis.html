@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuminaDx AIH — Analysis</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-icon">⬡</div>
+      <span class="brand-name">Lumina<span>Dx</span></span>
+    </div>
+    <div class="topbar-center">
+      <div class="topbar-status">
+        <span class="status-dot" id="analysis-status-dot"></span>
+        <span id="analysis-status-text">AWAITING ANALYSIS</span>
+        <span style="color:var(--slate-700)">|</span>
+        <span>STEP 02 OF 03</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span class="session-id" id="topbar-session-id">SID: —</span>
+      <a href="/intake" class="topbar-btn">← Intake</a>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <span class="sidebar-section-label">Workflow</span>
+    <a href="/" class="nav-item" data-page="home">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview <span class="nav-badge">HOME</span>
+    </a>
+    <a href="/intake" class="nav-item" data-page="intake">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+      Patient Intake <span class="nav-badge">01</span>
+    </a>
+    <a href="/analysis" class="nav-item active" data-page="analysis">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Analysis <span class="nav-badge">02</span>
+    </a>
+    <a href="/report" class="nav-item disabled" data-page="report">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+      Report <span class="nav-badge">03</span>
+    </a>
+    <span class="sidebar-section-label">System</span>
+    <a href="#" class="nav-item" id="clear-session-btn">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+      Clear Session
+    </a>
+    <div class="sidebar-footer">
+      <div class="kpi-label" style="padding:0 8px">Build</div>
+      <div style="padding:4px 8px;font-family:var(--font-mono);font-size:10px;color:var(--slate-600)">LuminaDx AIH · v1.0.0</div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ─────────────────────────────────────────────────────── -->
+  <main class="main-content">
+    <div class="content-inner">
+
+      <div class="page-header">
+        <div class="page-eyebrow">Step 02 — Diagnostic Engine</div>
+        <h1 class="page-title">AI Analysis</h1>
+        <p class="page-subtitle">LuminaDx processes all intake data against IAIHG revised criteria and generates a scored diagnostic classification.</p>
+      </div>
+
+      <!-- Patient Summary Bar -->
+      <div class="card" style="margin-bottom:16px;padding:16px 24px">
+        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+          <div>
+            <div class="kpi-label">Patient</div>
+            <div style="font-size:14px;font-weight:600;color:var(--slate-200)" id="summary-name">—</div>
+          </div>
+          <div style="width:1px;height:32px;background:var(--glass-border)"></div>
+          <div>
+            <div class="kpi-label">Age / Sex</div>
+            <div style="font-size:14px;font-weight:600;color:var(--slate-200)" id="summary-age-sex">—</div>
+          </div>
+          <div style="width:1px;height:32px;background:var(--glass-border)"></div>
+          <div>
+            <div class="kpi-label">ANA</div>
+            <div style="font-size:13px;font-weight:600;color:var(--slate-300)" id="summary-ana">—</div>
+          </div>
+          <div>
+            <div class="kpi-label">IgG (g/L)</div>
+            <div style="font-size:13px;font-weight:600;color:var(--slate-300)" id="summary-igg">—</div>
+          </div>
+          <div>
+            <div class="kpi-label">ALT (U/L)</div>
+            <div style="font-size:13px;font-weight:600;color:var(--slate-300)" id="summary-alt">—</div>
+          </div>
+          <div>
+            <div class="kpi-label">AST (U/L)</div>
+            <div style="font-size:13px;font-weight:600;color:var(--slate-300)" id="summary-ast">—</div>
+          </div>
+          <div style="margin-left:auto">
+            <a href="/intake" class="btn btn-ghost" style="font-size:12px;padding:6px 14px">Edit Intake</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Run Analysis Button / State -->
+      <div id="pre-analysis-panel" class="card" style="margin-bottom:16px;text-align:center;padding:40px 24px">
+        <div style="font-size:32px;margin-bottom:12px">🧬</div>
+        <div style="font-size:15px;font-weight:700;color:var(--slate-200);margin-bottom:6px">Ready to Analyse</div>
+        <div style="font-size:13px;color:var(--slate-500);margin-bottom:24px;max-width:420px;margin-left:auto;margin-right:auto">
+          All intake data loaded. Click below to send to the LuminaDx diagnostic engine for IAIHG scoring.
+        </div>
+        <button class="btn btn-primary btn-lg" id="run-analysis-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Run Diagnostic Analysis
+        </button>
+      </div>
+
+      <!-- Loading Panel (hidden by default) -->
+      <div id="loading-panel" class="card" style="margin-bottom:16px;text-align:center;padding:48px 24px;display:none">
+        <div class="analysis-spinner" style="margin:0 auto 20px"></div>
+        <div style="font-size:14px;font-weight:600;color:var(--slate-200);margin-bottom:6px">Analysing…</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--slate-500)" id="loading-step-text">Sending data to LuminaDx</div>
+      </div>
+
+      <!-- Results Panel (hidden by default) -->
+      <div id="results-panel" style="display:none">
+
+        <!-- IAIHG Score KPIs -->
+        <div class="kpi-grid" style="margin-bottom:16px">
+          <div class="kpi-cell">
+            <div class="kpi-label">IAIHG Score</div>
+            <div class="kpi-value blue" id="result-score">—</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-label">Classification</div>
+            <div class="kpi-value" style="font-size:16px;padding-top:2px" id="result-classification">—</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-label">Confidence</div>
+            <div class="kpi-value cyan" id="result-confidence">—</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="kpi-label">Treatment Indication</div>
+            <div class="kpi-value" style="font-size:14px;font-weight:400;padding-top:4px;line-height:1.4" id="result-treatment">—</div>
+          </div>
+        </div>
+
+        <!-- Score Breakdown + Narrative -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Score Breakdown</span>
+              <span class="badge badge-blue">IAIHG Revised</span>
+            </div>
+            <div id="score-breakdown" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">AI Narrative</span>
+              <span class="badge badge-slate">LuminaDx</span>
+            </div>
+            <div id="ai-narrative" style="font-size:13px;color:var(--slate-400);line-height:1.8"></div>
+          </div>
+
+        </div>
+
+        <!-- Recommendations -->
+        <div class="card" style="margin-bottom:24px">
+          <div class="card-header">
+            <span class="card-title">Clinical Recommendations</span>
+            <span class="badge badge-amber">Advisory</span>
+          </div>
+          <div id="ai-recommendations" style="font-size:13px;color:var(--slate-400);line-height:1.8"></div>
+        </div>
+
+        <!-- Proceed to Report -->
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <button class="btn btn-ghost" id="rerun-btn">↺ Re-run Analysis</button>
+          <a href="/report" class="btn btn-primary btn-lg" id="to-report-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            Generate Report
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Error Panel -->
+      <div id="error-panel" style="display:none" class="card">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:24px">⚠</span>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--accent-red);margin-bottom:4px">Analysis Failed</div>
+            <div style="font-size:12px;color:var(--slate-500)" id="error-message"></div>
+          </div>
+          <button class="btn btn-ghost" id="retry-btn" style="margin-left:auto">Retry</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="/app.js"></script>
+<script src="/analysis.js"></script>
+</body>
+</html>

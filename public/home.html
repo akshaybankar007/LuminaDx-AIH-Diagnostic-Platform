@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuminaDx — Clinical Overview</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-icon">⬡</div>
+      <span class="brand-name">Lumina<span>Dx</span></span>
+    </div>
+
+    <div class="topbar-center">
+      <div class="topbar-status">
+        <span class="status-dot"></span>
+        <span>SYSTEM NOMINAL</span>
+        <span style="color:var(--slate-700)">|</span>
+        <span>AIH DIAGNOSTIC ENGINE</span>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <span class="session-id" id="topbar-session-id">SID: —</span>
+      <a href="/intake" class="topbar-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        New Assessment
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <span class="sidebar-section-label">Workflow</span>
+
+    <a href="/" class="nav-item active" data-page="home">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      Overview
+      <span class="nav-badge">HOME</span>
+    </a>
+
+    <a href="/intake" class="nav-item" data-page="intake">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <rect x="8" y="2" width="8" height="4" rx="1"/>
+        <line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>
+      </svg>
+      Patient Intake
+      <span class="nav-badge">01</span>
+    </a>
+
+    <a href="/analysis" class="nav-item disabled" data-page="analysis">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      Analysis
+      <span class="nav-badge">02</span>
+    </a>
+
+    <a href="/report" class="nav-item disabled" data-page="report">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+      Report
+      <span class="nav-badge">03</span>
+    </a>
+
+    <span class="sidebar-section-label">System</span>
+
+    <a href="#" class="nav-item" id="clear-session-btn">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
+        <path d="M10 11v6"/><path d="M14 11v6"/>
+      </svg>
+      Clear Session
+    </a>
+
+    <div class="sidebar-footer">
+      <div class="kpi-label" style="padding:0 8px">Build</div>
+      <div style="padding:4px 8px;font-family:var(--font-mono);font-size:10px;color:var(--slate-600)">
+        LuminaDx AIH · v1.0.0
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ─────────────────────────────────────────────────────── -->
+  <main class="main-content">
+    <div class="content-inner">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-eyebrow">Clinical Dashboard</div>
+        <h1 class="page-title">Autoimmune Hepatitis Diagnostic Platform</h1>
+        <p class="page-subtitle">
+          Multi-modal analysis for AIH classification,
+          scoring, and clinical reporting. Guided by established IAIHG criteria.
+        </p>
+      </div>
+
+      <!-- KPI Row -->
+      <div class="kpi-grid" style="margin-bottom:28px">
+        <div class="kpi-cell">
+          <div class="kpi-label">Diagnostic Engine</div>
+          <div class="kpi-value blue">LIVE</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Model</div>
+          <div class="kpi-value" style="font-size:14px;padding-top:4px;color:var(--slate-300)">LuminaDx</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Scoring System</div>
+          <div class="kpi-value" style="font-size:14px;padding-top:4px;color:var(--slate-300)">IAIHG Revised</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Session Status</div>
+          <div class="kpi-value green" id="kpi-session-status">READY</div>
+        </div>
+      </div>
+
+      <!-- Two-column layout -->
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start">
+
+        <!-- Left: Clinical Overview card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Clinical Overview</span>
+            <span class="badge badge-blue">AIH Protocol</span>
+          </div>
+
+          <p style="font-size:13px;color:var(--slate-400);line-height:1.75;margin-bottom:20px">
+            Autoimmune Hepatitis (AIH) is a chronic, immune-mediated liver disease requiring
+            precise multi-parameter evaluation. This platform integrates serological markers,
+            histological data, and clinical findings into a structured IAIHG scoring pipeline.
+          </p>
+
+          <div class="divider"></div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+            <div>
+              <div class="kpi-label" style="margin-bottom:6px">Diagnostic Criteria</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--accent-emerald);font-size:10px">●</span> ANA / ASMA / Anti-LKM1
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--accent-emerald);font-size:10px">●</span> IgG Serum Levels
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--accent-emerald);font-size:10px">●</span> Liver Histology
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--accent-emerald);font-size:10px">●</span> Viral Hepatitis Exclusion
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="kpi-label" style="margin-bottom:6px">Output Deliverables</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--blue-400);font-size:10px">●</span> IAIHG Score
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--blue-400);font-size:10px">●</span> Diagnostic Classification
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--blue-400);font-size:10px">●</span> AI Narrative Summary
+                </li>
+                <li class="flex items-center gap-2 text-sm" style="color:var(--slate-400)">
+                  <span style="color:var(--blue-400);font-size:10px">●</span> PDF Clinical Report
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="/intake" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+            Start Assessment
+          </a>
+        </div>
+
+        <!-- Right: Workflow steps card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Workflow</span>
+            <span class="badge badge-slate">3 Steps</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:0">
+
+            <div class="workflow-step" style="display:flex;gap:14px;padding-bottom:20px;position:relative">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+                <div style="width:28px;height:28px;border-radius:4px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--blue-400);font-weight:600;flex-shrink:0">01</div>
+                <div style="width:1px;flex:1;background:var(--glass-border);margin-top:6px"></div>
+              </div>
+              <div style="padding-top:4px">
+                <div style="font-size:13px;font-weight:600;color:var(--slate-200);margin-bottom:4px">Patient Intake</div>
+                <div style="font-size:12px;color:var(--slate-500);line-height:1.6">Enter demographics, symptoms, lab values, and upload supporting documents.</div>
+              </div>
+            </div>
+
+            <div class="workflow-step" style="display:flex;gap:14px;padding-bottom:20px;position:relative">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+                <div style="width:28px;height:28px;border-radius:4px;background:var(--slate-800);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--slate-500);font-weight:600;flex-shrink:0">02</div>
+                <div style="width:1px;flex:1;background:var(--glass-border);margin-top:6px"></div>
+              </div>
+              <div style="padding-top:4px">
+                <div style="font-size:13px;font-weight:600;color:var(--slate-400);margin-bottom:4px">AI Analysis</div>
+                <div style="font-size:12px;color:var(--slate-500);line-height:1.6">LuminaDx processes all inputs against IAIHG criteria and generates a scored diagnosis.</div>
+              </div>
+            </div>
+
+            <div class="workflow-step" style="display:flex;gap:14px">
+              <div style="display:flex;flex-direction:column;align-items:center">
+                <div style="width:28px;height:28px;border-radius:4px;background:var(--slate-800);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--slate-500);font-weight:600;flex-shrink:0">03</div>
+              </div>
+              <div style="padding-top:4px">
+                <div style="font-size:13px;font-weight:600;color:var(--slate-400);margin-bottom:4px">Clinical Report</div>
+                <div style="font-size:12px;color:var(--slate-500);line-height:1.6">Download a structured PDF report suitable for clinical handoff or records.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--slate-600);line-height:1.8">
+            <div>⚠ FOR CLINICAL DECISION SUPPORT ONLY</div>
+            <div>Not a substitute for physician judgment.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</div><!-- /app-shell -->
+
+<script src="/app.js"></script>
+</body>
+</html>
